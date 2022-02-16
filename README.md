@@ -1,9 +1,15 @@
 # Survey Project
-A Machine Learning Project utilising data from the Scottish Household Survey.
+An analysis project utilising data from the Scottish Household Survey.
 
 ## Context
 
+The Scottish Household Survey (SHS) is a continuous survey based on a random sample of the general population in private residences in Scotland. It is important in helping make representative estimates both at Scotland, as well as at local-authority level. The survey started in 1999 and covers a wide range of topics to allow links to be made between different policy areas.
+
+The survey provides robust evidence on the composition, characteristics, attitudes and behaviour of private households and individuals as well as evidence on the physical condition of Scotland’s homes. The large scale of the SHS enables everyone using the survey findings to obtain a robust deeper understanding of issues by being able to analyse across key demographic household characteristics such as deprivation, age, income, gender, rurality, ethnicity and other equalities. This is crucial to informing the Fairer Scotland agenda, National Performance Framework and feeds in to the Scottish Surveys Core Questions (SSCQ) sample.
+
 #### Business intelligence and data-driven decision making
+
+
 
 What insights can the business/organisation gain from your analysis and how will your analysis help the business/organisation make better decisions? 
 

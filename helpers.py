@@ -3,10 +3,6 @@ import numpy as np
 import plotly.express as px
 
 
-def weighted_average(df, values, weights):
-    return sum(df[weights] * df[values]) / df[weights].sum()
-
-
 def bar_plotter(df, var1, y, var2):
     
     view = (
