@@ -1,4 +1,5 @@
-# Survey Project
+# Scottish Household Survey Project
+
 An analysis project utilising data from the Scottish Household Survey. The aim of this project is to provide an answer to the following questions:
 
 1. Are there certain groups of people that have good local access to green space in Scotland?
@@ -11,7 +12,8 @@ An analysis project utilising data from the Scottish Household Survey. The aim o
 access? Are there differences in how they rate their neighbourhoods and communities?
 
 5. Are there any characteristics that would allow us to predict the neighbourhood and community ratings in the future?
-***
+
+<br>
 <br>
 
 ## Context
@@ -42,7 +44,8 @@ The survey is run by Ipsos MORI on behalf of the Scottish Government. They are a
 'Our passionately curious experts not only provide the most precise measurement, but shape it to provide True Understanding of Society, Markets and People.' ([source](https://www.ipsos.com/en-uk/about-us)).
 
 The present project fits into the wider goals of the survey by providing additional understanding and actionable insights on the data. Given the great scope of the SHS, its results are open data for everyone to examine and analyse.
-***
+
+<br>
 <br>
 
 ## Data
@@ -58,6 +61,8 @@ Three datasets were sourced for the project:
 - Neighbourhood rating - Scottish Household Survey
 
 - Community Belonging - Scottish Household Survey
+
+<br>
 
 ### **Types of data and variables**
 
@@ -95,9 +100,13 @@ Data comes in the form of a relational data cube. 'Slices' of the cube can be ex
 
 - `community belonging`: Categorical with levels. How the respondent rates their sentiment of community belonging. Values: 'All', 'Not at all strongly', 'Not very strongly', "Don't know", 'Fairly strongly', 'Very strongly'.
 
+<br>
+
 ### **Data formats**
 
 The three datasets that are the basis of the project were downloaded in .CSV format from the Scottish Government's website in February 2022.
+
+<br>
 
 ### **Data quality and bias**
 
@@ -113,7 +122,7 @@ One last source of potential bias includes the exclusion list. For example: hosp
 
 Of interest to the organisation may be to include proxies for the ratings questions (e.g. 'how strongly do you feel about moving somewhere else if you were given the choice?' 'Do you know your neighbour's name? Would you ask them for help?') and provide more options for the gender and ethnicity questions.
 
-***
+<br>
 <br>
 
 ## Ethics
@@ -122,18 +131,20 @@ Of interest to the organisation may be to include proxies for the ratings questi
 
 Other than the already mentioned concerns for the potential biases in the data, there could be further ethical considerations regarding sourcing and extraction. When interviewers visit people's homes, a non-intrusive inspection of the place may occur should respondents consent to it. The purpose of it is to broadly assess the housing conditions across Scotland, including insulation and state of repair. In all the considered years, surveyors were required to be professionally qualified and were recruited from a variety of different dwelling-related professions such as chartered surveyors, architects, civil engineers, environmental health officers and building control officers. Newly recruited surveyors were required to attend a five-day residential training course, which incorporated fieldwork practise, so that all were fully proficient with the methodology used. The training was led by representatives by Ipsos MORI with the Scottish Government providing support and input.The full methodology followed by the interviewers and surveyors during the fieldwork process can be found [here](https://www.gov.scot/publications/scottish-household-survey-2019-methodology-fieldwork-outcomes/pages/5/).
 
+<br>
+
 ### **Ethical implications of business requirements**
 
 Particular to the business questions there are three key variables: walking distance to the nearest green or blue space, neighbourhood rating and community belonging. Of special note is the question of distance to the nearest green space, in so far as this distance is measured in duration (the minutes it takes to walk) and not length (miles or metres). Duration alone probably makes for a better target compared to length alone, given than it has a greater impact on quality of life. For instance, if it were found that people of reduced mobility lacked access to green spaces, then measures to improve walkways, paths, road crossings and stairways should be prescribed. On the other hand, if fully mobile adults were found to lack access, then an increase in the number of green spaces should be prescribed. Unfortunately, the data does not include enough categories to complement this duration variable, such as whether people have reduced mobility. This information would be valuable in prescriptive analysis and as such its absence may carry ethical implications. The other business questions possess no ethical implications further than the ones already mentioned about bias. 
 
-***
+<br>
 <br>
 
 ## Analysis
 
 ### **Stages in the data analysis process**
 
-The main stages of analysis were the following:
+The full exploratory analysis can be found in `exploratory_analysis.html`. The main stages of this analysis were the following:
 
 - Framing the business requirements according to a brief and sourcing the datasets necessary for analysis.
 
@@ -143,24 +154,55 @@ The main stages of analysis were the following:
 
 - Filtering data for Scottish averages, re-binning variables to use the same binning across all data, impute missing values.
 
-- Initial 
+- Initial EDA using `Pandas Profiling`.
 
+- Are there certain groups that have local access to green space? Data exploration and visualisations via use of custom functions.
+
+- Are there groups that are lacking access to green spaces? Data exploration and visualisations via use of custom functions.
+
+- How do people in neighbourhoods with good access to green space differ from those who have no good access? Statistical analysis and visualisations via use of custom functions.
+
+
+The full predictive modelling can be found in `predictive_modelling.html`. The main stages of model building were the following:
+
+- Data preparation: Reading in the two datasets and cleaning variable names.
+
+- Filtering out aggregated values.
+
+- Feature engineering: encoding variables into binary values.
+
+- Train and test set splitting: separating data from years 2013-2018 to use as train set and 2019 as test set. Separated the two response variables (neighbourhood rating and community belonging) from both train and test sets, since the two were at risk of being highly correlated and therefore increase the chance of over-fitting the models.
+
+- Model training: two models were trained, a Logistic Regression model using the engineered features dataset and a Random Forest model using the minimally prepared dataset.
+
+- Model evaluation: scored the two Logistic Regression models in terms of their mean absolute error, cross-validation accuracy and Area Under the ROC Curve metric. Scored the two Random Forest Models in terms of cross-validation accuracy.
+
+<br>
 
 ### **Tools for data analysis**
 
-Analysis was carried out in Python. Tools include git and GitHub, 
+Analysis was carried out in Python language. Tools include git and GitHub, Jupyter Notebooks, Jupyter Lab and VS Code. A full list of Python packages can be found in `requirements.txt`.
 
-### **Descriptive and predictive and prescriptive analysis**
+<br>
 
-Please report under which of the below categories your analysis falls **and why** (can be more than one) 
+### **Summary conclusions of the analysis**
 
+**Descriptive Analytics**
 
-**Descriptive Analytics** tells you what happened in the past.
+Conclusions of the exploratory analysis are the following:
 
-**Diagnostic Analytics** helps you understand why something happened in the past.
+- In terms of the very general characteristics of the people who report to live close to green spaces (defined as being within a 5 minute walk), it is concluded that rural households, followed by households with a mortgage or loan, and lastly households with children, score the highest percentages of adults. That is to say most of the people with good access to green spaces in Scotland meet one or more of these characteristics.
+- In terms of the characteristics of people who live far from green spaces (more than a 10 min walk): non-ethnic-white households, pensioner/aged 65+ households, and households in the lowest SIMD quitile generally score the highest percentages. That is to say most people who lack access to green spaces in Scotland meet one or more of these.
+- Community belonging and neighbourhood rating show no relationship with green space access, as people seem to consistently report feeling fairly/very positive regardless of their access. 
 
-**Predictive Analytics** predicts what is most likely to happen in the future.
+**Diagnostic Analytics**
 
-**Prescriptive Analytics** recommends actions you can take to affect those outcomes.
+In terms of the demographics of groups with good access to green spaces and those without good access, Variation across the years is generally minor, suggesting that access is not increasing during the years studied in this report 2013-2019. In an attempt to better understand, explain and predict neighbourhood ratings and community belongings, several predictive models were built.
+
+**Predictive Analytics**
+
+Out of the four predictive models built, only the Logistic Regression model that predicts neighbourhood ratings was accurate enough. In order to build this model, data features were heavily engineered, practically changing the entire dataset. Given that the original survey metrics were abstracted away, the model lacks explanatory power and can be utilised merely as a predicting tool.
+
+**Prescriptive Analytics** the prescriptive aspects of this analysis are towards the data structure only. As it stands, the data can only be used to describe the characteristics of households with and without good access to green spaces. However, the data does not seem to reflect any changes in access over the period of study, nor be easily interpreted to understand or predict the relationship between green space access and neighbourhood/community ratings.
 
 
