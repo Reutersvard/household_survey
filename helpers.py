@@ -12,7 +12,7 @@ def bar_plotter(df, var1, y, var2):
     
     fig = px.bar(view, x=var1, y=y, color=var2, barmode='group', width=600, height=400)
     
-    return fig.show('notebook')
+    return fig.show()
 
 
 def greenspace_plotter(df, var1, var2):
@@ -36,7 +36,7 @@ def greenspace_plotter(df, var1, var2):
         title=f'Percentage of adults living {option} from green spaces', markers=True)
     )
 
-    return fig.show('notebook')
+    return fig.show()
 
 
 def merger(df1, df2, df3):
